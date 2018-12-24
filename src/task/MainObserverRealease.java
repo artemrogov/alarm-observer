@@ -1,6 +1,5 @@
 package task;
 
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -53,37 +52,44 @@ class Sensor implements Observed{
 }
 class Green implements Alarm {
 
+    private int prevTemp;
+
     @Override
     public void tempChanged(int temp) {
-        if (temp>=100){
+        if (temp>=100 && prevTemp<100){
             System.out.print(" Green ");
 
         }
+
+        prevTemp = temp;
 
     }
 }
 
 class Yellow implements Alarm {
-
+        private int prevTemp;
     @Override
     public void tempChanged(int temp) {
-        if (temp>=300){
+        if (temp>=300 && prevTemp<300){
             System.out.print(" Yellow ");
         }
+
+        prevTemp = temp;
 
     }
 }
 
 class Red implements Alarm {
 
-
+    private int prevTemp;
 
     @Override
     public void tempChanged(int temp) {
-         if (temp>=600){
+         if (temp>=600 && prevTemp<600){
              System.out.print(" RED ");
 
          }
+         prevTemp = temp;
          System.out.println();
 
 
@@ -109,7 +115,8 @@ public class MainObserverRealease {
             System.out.println("текущая температура: " + sensor.getTemperature());
         }
 
-
+            sensor.setTemperature(10);
+            sensor.setTemperature(700);
     }
 
 }
